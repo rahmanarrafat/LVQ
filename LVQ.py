@@ -7,9 +7,20 @@ Created on Wed Mar 28 11:53:52 2018
 
 import numpy as np
 
-def LVQ(data, epoch, w, label, alpha, r_alpha):
+'''
+##################################################
+data = data file yang akan dilakukan pelatihan
+MaxEpoch = maksimal iterasi yang digunakan pada proses pelatihan
+w = bobot awal yang digunakan pada proses pelatihan
+label = kelas dari data yang akan dilakukan pelatihan
+alpha = learining rate yang akan digunakan pada proses pelatihan
+r_alpha = pengurangan learning rate
+##################################################
+'''
+
+def LVQ(data, MaxEpoch, w, label, alpha, r_alpha):
     e = 0
-    while(e < epoch):
+    while(e < MaxEpoch):
         for i in range(data.shape[1]): #jumlah data
             jarak = np.zeros((1,w.shape[1]),dtype = float) 
             for j in range(w.shape[1]): #banyak kelas bobot
@@ -26,6 +37,6 @@ def LVQ(data, epoch, w, label, alpha, r_alpha):
                 w[:, C] = jarak2
         alpha = alpha - (r_alpha * alpha)
         e = e+1    
-        if e == epoch:
+        if e == MaxEpoch:
             break
     return w
